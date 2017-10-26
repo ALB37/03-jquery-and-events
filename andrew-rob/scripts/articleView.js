@@ -42,7 +42,6 @@ articleView.handleAuthorFilter = function() {
       // DONE: If the <select> menu was changed to an option that has a value, we first need to hide all the articles, and then show just the ones that match for the author that was selected.
       // Use an "attribute selector" to find those articles, and fade them in for the reader.
       $articles.find('article').hide();
-      console.log($(this).val());
       $articles.find(`[data-author='${$(this).val()}']`).fadeIn(1250);
 
     } else {
@@ -54,11 +53,21 @@ articleView.handleAuthorFilter = function() {
 };
 
 articleView.handleCategoryFilter = function() {
-  // TODO: Just like we do for #author-filter above, we should handle change events on the #category-filter element.
+  // DONE: Just like we do for #author-filter above, we should handle change events on the #category-filter element.
   // When an option with a value is selected, hide all the articles, then reveal the matches.
   // When the blank (default) option is selected, show all the articles, except for the template.
   // Be sure to reset the #author-filter while you are at it!
+  $('#category-filter').on('change', function() {
+    let $articles = $('#articles');
+    if ($(this).val()) {
+      $articles.find('article').hide();
+      $articles.find(`[data-category='${$(this).val()}']`).fadeIn(1250);
 
+    } else {
+      $articles.find('article:not(.template)').show();
+    }
+    $('#author-filter').val('');
+  });
 };
 
 articleView.handleMainNav = function() {
@@ -82,4 +91,5 @@ articleView.setTeasers = function() {
 $(document).ready(function() {
   articleView.populateFilters();
   articleView.handleAuthorFilter();
+  articleView.handleCategoryFilter();
 })
