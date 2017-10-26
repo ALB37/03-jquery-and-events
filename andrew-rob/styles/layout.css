@@ -53,6 +53,10 @@ footer {
   width: 100%;
 }
 
+hr {
+  clear: both;
+}
+
 .template {
   display: none;
 }
