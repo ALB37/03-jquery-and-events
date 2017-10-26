@@ -42,7 +42,7 @@ articleView.handleAuthorFilter = function() {
       // DONE: If the <select> menu was changed to an option that has a value, we first need to hide all the articles, and then show just the ones that match for the author that was selected.
       // Use an "attribute selector" to find those articles, and fade them in for the reader.
       $articles.find('article').hide();
-      $articles.find(`[data-author='${$(this).val()}']`).fadeIn(1250);
+      $articles.find(`[data-author='${$(this).val()}']`).fadeIn(1000);
 
     } else {
       // DONE: If the <select> menu was changed to an option that is blank, we should first show all the articles, except the one article we are using as a template.
@@ -61,7 +61,7 @@ articleView.handleCategoryFilter = function() {
     let $articles = $('#articles');
     if ($(this).val()) {
       $articles.find('article').hide();
-      $articles.find(`[data-category='${$(this).val()}']`).fadeIn(1250);
+      $articles.find(`[data-category='${$(this).val()}']`).fadeIn(1000);
 
     } else {
       $articles.find('article:not(.template)').show();
@@ -75,7 +75,7 @@ articleView.handleMainNav = function() {
   // Clicking any .tab element should hide all the .tab-content sections, and then reveal the single .tab-content section that is associated with the clicked .tab element.
   // So: You need to dynamically build a selector string with the correct ID, based on the data available to you on the .tab element that was clicked.
   $( 'main' ).children().hide();
-  $( `#${$( this ).attr( 'data-content' )}` ).fadeIn( 1250 );
+  $( `#${$( this ).attr( 'data-content' )}` ).fadeIn( 1000 );
 };
 
 articleView.setTeasers = function() {
@@ -105,6 +105,6 @@ $(document).ready(function() {
   articleView.handleCategoryFilter();
   // REVIEWED: Now trigger a click on the first .tab element, to set up the page.
   $( '#about' ).hide(); //Note: Our approach to this was different, but effective.
-  $( '.tab' ).on( 'click', articleView.handleMainNav );
+  $( '.main-nav' ).on( 'click', '.tab', articleView.handleMainNav );
   articleView.setTeasers();
 })
